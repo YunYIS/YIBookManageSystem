@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="G:/eclipse-committers-neon-2-win32-x86_64/eclipse/plugins/org.eclipse.ui.workbench_3.108.2.v20161025-2029.jar" sourcepath="G:/eclipse-committers-neon-2-win32-x86_64/eclipse/plugins/org.eclipse.ui.workbench.source_3.108.2.v20161025-2029.jar"/>
 	<classpathentry kind="lib" path="G:/eclipse-committers-neon-2-win32-x86_64/eclipse/plugins/com.ibm.icu_56.1.0.v201601250100.jar" sourcepath="G:/eclipse-committers-neon-2-win32-x86_64/eclipse/plugins/com.ibm.icu.source_56.1.0.v201601250100.jar"/>
 	<classpathentry kind="lib" path="G:/eclipse-committers-neon-2-win32-x86_64/eclipse/plugins/org.eclipse.ui.forms_3.7.0.v20160518-1929.jar" sourcepath="G:/eclipse-committers-neon-2-win32-x86_64/eclipse/plugins/org.eclipse.ui.forms.source_3.7.0.v20160518-1929.jar"/>
+	<classpathentry kind="lib" path="lib/mssql-jdbc-6.2.2.jre8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

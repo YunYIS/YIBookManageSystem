@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -12,7 +13,11 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-
+/**
+ * 
+ * @author 张云天
+ *
+ */
 @SuppressWarnings("serial")
 public class UserLoginPanel extends JPanel {
 
@@ -23,7 +28,7 @@ public class UserLoginPanel extends JPanel {
 	private JButton loginButton;
 	private JButton backButton;
 	
-	public UserLoginPanel() {
+	public UserLoginPanel(JFrame mainJFrame, JPanel panel, JPanel contentPanel) {
 		
 		setLayout(null);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -45,7 +50,7 @@ public class UserLoginPanel extends JPanel {
 		
 		managerLabel = new JLabel("用户名：");
 		managerLabel.setFont(new Font("宋体", Font.PLAIN, 14));
-		managerLabel.setBounds(238, 193, 43, 33);
+		managerLabel.setBounds(225, 193, 56, 33);
 		add(managerLabel);
 		
 		managerTextField = new JTextField();
@@ -71,7 +76,10 @@ public class UserLoginPanel extends JPanel {
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				panel.removeAll();
+				panel.add(contentPanel);
+				panel.validate();
+				mainJFrame.repaint();
 			}
 		});
 		backButton.setBounds(420, 370, 93, 33);

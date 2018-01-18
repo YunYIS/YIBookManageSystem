@@ -14,7 +14,11 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-
+/**
+ * 
+ * @author ÕÅÔÆÌì
+ *
+ */
 @SuppressWarnings("serial")
 public class ManagerLoginPanel extends JPanel {
 	
@@ -25,7 +29,7 @@ public class ManagerLoginPanel extends JPanel {
 	private JButton loginButton;
 	private JButton backButton;
 
-	public ManagerLoginPanel() {
+	public ManagerLoginPanel(JFrame mainJFrame, JPanel panel, JPanel contentPanel) {
 		setLayout(null);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -65,6 +69,13 @@ public class ManagerLoginPanel extends JPanel {
 		add(passwordTextField);
 		
 		loginButton = new JButton("µÇÂ½");
+		loginButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				managerTextField.getText();
+				
+			}
+		});
 		loginButton.setBounds(270, 370, 93, 33);
 		add(loginButton);
 		
@@ -72,8 +83,10 @@ public class ManagerLoginPanel extends JPanel {
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MainFrame mainFrame = new MainFrame();
-				mainFrame.setPanelView();
+				panel.removeAll();
+				panel.add(contentPanel);
+				panel.validate();
+				mainJFrame.repaint();
 			}
 		});
 		backButton.setBounds(420, 370, 93, 33);

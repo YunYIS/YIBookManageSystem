@@ -17,11 +17,16 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+/**
+ * 
+ * @author 张云天
+ *
+ */
 public class MainFrame {
 
 	private JFrame frame;
 	private JPanel panel;
+	private JPanel contentPanel = new JPanel();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -40,20 +45,22 @@ public class MainFrame {
 	/**
 	 * 初始化JFrame
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 790, 519);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("image/book.png"));
-		setPanelView();
+		setPanelContent();
+		panel = (JPanel) frame.getContentPane();
+		panel.add(contentPanel);
 	}
 	
 	/**
-	 * 设置主界面，（界面切换由不同的JPanel完成，当MainFrame.panel指向其他JPanel实例时，显示不同的界面）
+	 * 设置主界面内容
 	 */
-	public void setPanelView(){
-		panel = (JPanel) frame.getContentPane();
-		panel.setLayout(null);
+	public void setPanelContent(){
+		
+		contentPanel.setLayout(null);
 		
 		/**
 		 * 放置图片book.png
@@ -65,7 +72,7 @@ public class MainFrame {
 		bookIconLabel.setBackground(new Color(240, 240, 240));
 		bookIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		bookIconLabel.setBounds(170, 77, 75, 75);
-		panel.add(bookIconLabel);
+		contentPanel.add(bookIconLabel);
 		
 		/**
 		 * 系统标题显示
@@ -74,7 +81,7 @@ public class MainFrame {
 		systemTitleLabel.setFont(new Font("宋体", Font.BOLD, 29));
 		systemTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		systemTitleLabel.setBounds(274, 49, 325, 128);
-		panel.add(systemTitleLabel);
+		contentPanel.add(systemTitleLabel);
 		
 		try {
 			//更改界面风格
@@ -90,18 +97,17 @@ public class MainFrame {
 		JButton managerLoginButton = new JButton("管理员登陆");
 		managerLoginButton.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				panel = new View.ManagerLoginPanel();
+			public void mouseClicked(MouseEvent arg0) {			
+				panel.removeAll();
+				panel.add(new ManagerLoginPanel(frame, panel, contentPanel));
 				panel.validate();
-				frame.setContentPane(panel);
-				frame.validate();
-			
+				frame.repaint();
 			}
 		});
 		managerLoginButton.setFont(new Font("宋体", Font.PLAIN, 15));
 		managerLoginButton.setBounds(317, 224, 134, 47);
 		managerLoginButton.setFocusable(false);
-		panel.add(managerLoginButton);
+		contentPanel.add(managerLoginButton);
 		
 		/**
 		 * 用户登陆按钮 
@@ -110,16 +116,16 @@ public class MainFrame {
 		userLoginButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				panel = new View.ManagerLoginPanel();
+				panel.removeAll();
+				panel.add(new UserLoginPanel(frame, panel, contentPanel));
 				panel.validate();
-				frame.setContentPane(panel);
-				frame.validate();
+				frame.repaint();
 			}
 		});
 		userLoginButton.setFont(new Font("宋体", Font.PLAIN, 15));
 		userLoginButton.setBounds(317, 301, 134, 47);
 		userLoginButton.setFocusable(false);
-		panel.add(userLoginButton);
+		contentPanel.add(userLoginButton);
 		
 		/**
 		 * 退出按钮
@@ -134,8 +140,16 @@ public class MainFrame {
 		exitButton.setFont(new Font("宋体", Font.PLAIN, 15));
 		exitButton.setBounds(317, 372, 134, 47);
 		exitButton.setFocusable(false);
-		panel.add(exitButton);
+		contentPanel.add(exitButton);
+		
 	}
-	
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
 	
 }
