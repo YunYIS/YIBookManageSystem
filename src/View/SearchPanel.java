@@ -14,6 +14,7 @@ public class SearchPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public SearchPanel() {
+		setBorder(null);
 		setLayout(null);
 		
 		searchTextField = new JTextField();
@@ -21,29 +22,29 @@ public class SearchPanel extends JPanel {
 		searchTextField.setBounds(0, 0, 349, 31);
 		add(searchTextField);
 		
-		JButton searchButton = new JButton("\u641C \u7D22 \u56FE \u4E66");
+		JButton searchButton = new JButton("搜 索 图 书");
 		searchButton.setFont(new Font("宋体", Font.PLAIN, 15));
 		searchButton.setBounds(379, 0, 123, 31);
 		add(searchButton);
 		
-		JLabel searchConditionLabel = new JLabel("\u641C\u7D22\u6761\u4EF6\uFF1A");
+		JLabel searchConditionLabel = new JLabel("搜索条件：");
 		searchConditionLabel.setFont(new Font("宋体", Font.PLAIN, 13));
 		searchConditionLabel.setBounds(0, 51, 65, 20);
 		add(searchConditionLabel);
 		
-		JRadioButton bookNameRadioButton = new JRadioButton("\u4E66\u540D");
+		JRadioButton bookNameRadioButton = new JRadioButton("书名");
 		bookNameRadioButton.setBounds(84, 51, 49, 23);
 		add(bookNameRadioButton);
 		
-		JRadioButton authorRadioButton = new JRadioButton("\u4F5C\u8005");
+		JRadioButton authorRadioButton = new JRadioButton("作者");
 		authorRadioButton.setBounds(143, 51, 49, 23);
 		add(authorRadioButton);
 		
-		JRadioButton summaryRadioButton = new JRadioButton("\u7B80\u4ECB");
+		JRadioButton summaryRadioButton = new JRadioButton("简介");
 		summaryRadioButton.setBounds(202, 51, 49, 23);
 		add(summaryRadioButton);
 		
-		JRadioButton allRadioButton = new JRadioButton("\u5168\u90E8\u5B57\u6BB5");
+		JRadioButton allRadioButton = new JRadioButton("全部字段");
 		allRadioButton.setBounds(261, 50, 73, 23);
 		add(allRadioButton);
 

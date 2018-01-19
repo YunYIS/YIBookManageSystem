@@ -24,8 +24,8 @@ import java.awt.event.MouseEvent;
  */
 public class MainFrame {
 
-	private JFrame frame;
-	private JPanel panel;
+	public static JFrame mainJFrame;
+	public static JPanel mainPanel;
 	private JPanel contentPanel = new JPanel();
 
 	public static void main(String[] args) {
@@ -34,7 +34,7 @@ public class MainFrame {
 				try {
 					MainFrame mainFrame = new MainFrame();
 					mainFrame.initialize();
-					mainFrame.frame.setVisible(true);
+					mainFrame.mainJFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,13 +46,13 @@ public class MainFrame {
 	 * 初始化JFrame
 	 */
 	public void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 790, 519);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("image/book.png"));
+		mainJFrame= new JFrame();
+		mainJFrame.setBounds(100, 100, 790, 519);
+		mainJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainJFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("image/book.png"));
 		setPanelContent();
-		panel = (JPanel) frame.getContentPane();
-		panel.add(contentPanel);
+		mainPanel = (JPanel) mainJFrame.getContentPane();
+		mainPanel.add(contentPanel);
 	}
 	
 	/**
@@ -98,10 +98,10 @@ public class MainFrame {
 		managerLoginButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {			
-				panel.removeAll();
-				panel.add(new ManagerLoginPanel(frame, panel, contentPanel));
-				panel.validate();
-				frame.repaint();
+				mainPanel.removeAll();
+				mainPanel.add(new ManagerLoginPanel(contentPanel));
+				mainPanel.validate();
+				mainJFrame.repaint();
 			}
 		});
 		managerLoginButton.setFont(new Font("宋体", Font.PLAIN, 15));
@@ -116,10 +116,10 @@ public class MainFrame {
 		userLoginButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				panel.removeAll();
-				panel.add(new UserLoginPanel(frame, panel, contentPanel));
-				panel.validate();
-				frame.repaint();
+				mainPanel.removeAll();
+				mainPanel.add(new UserLoginPanel(contentPanel));
+				mainPanel.validate();
+				mainJFrame.repaint();
 			}
 		});
 		userLoginButton.setFont(new Font("宋体", Font.PLAIN, 15));
@@ -142,14 +142,6 @@ public class MainFrame {
 		exitButton.setFocusable(false);
 		contentPanel.add(exitButton);
 		
-	}
-
-	public JFrame getFrame() {
-		return frame;
-	}
-
-	public JPanel getPanel() {
-		return panel;
 	}
 	
 }

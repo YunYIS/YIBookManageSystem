@@ -5,63 +5,62 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+@SuppressWarnings("serial")
 public class ManagerPanel extends JPanel {
-	private JTable table;
-	private JTable table_1;
-
+	
 	/**
 	 * Create the panel.
 	 */
 	public ManagerPanel() {
 		setLayout(null);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		JLabel lblZyt = new JLabel("\u7BA1\u7406\u5458 zyt");
-		lblZyt.setFont(new Font("宋体", Font.BOLD | Font.ITALIC, 16));
-		lblZyt.setBounds(539, 49, 106, 30);
-		add(lblZyt);
+		JLabel welcomeLabel = new JLabel("管理员 zyt");
+		welcomeLabel.setBounds(603, 121, 106, 30);
+		welcomeLabel.setFont(new Font("宋体", Font.BOLD | Font.ITALIC, 16));
+		add(welcomeLabel);
 		
-		JLabel lblNewLabel = new JLabel("\u56FE \u4E66 \u4FE1 \u606F \u7BA1 \u7406");
-		lblNewLabel.setFont(new Font("宋体", Font.BOLD, 26));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(211, 10, 257, 69);
-		add(lblNewLabel);
+		JLabel titleLabel = new JLabel("图 书 信 息 管 理");
+		titleLabel.setBounds(275, 60, 257, 69);
+		titleLabel.setFont(new Font("宋体", Font.BOLD, 26));
+		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		add(titleLabel);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
-		mntmNewMenuItem.setBounds(10, 126, 135, 22);
-		add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
-		mntmNewMenuItem_1.setBounds(10, 147, 135, 22);
-		add(mntmNewMenuItem_1);
-		
-
-	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
+		JButton queryButton = new JButton("查 询");
+		queryButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
 			}
 		});
+		queryButton.setBounds(118, 208, 123, 31);
+		queryButton.setFont(new Font("宋体", Font.PLAIN, 15));
+		add(queryButton);
+		
+		JButton updateButton = new JButton("修 改");
+		updateButton.setBounds(264, 208, 123, 31);
+		updateButton.setFont(new Font("宋体", Font.PLAIN, 15));
+		add(updateButton);
+		
+		JButton addButton = new JButton("增 加");
+		addButton.setBounds(409, 208, 123, 31);
+		addButton.setFont(new Font("宋体", Font.PLAIN, 15));
+		add(addButton);
+		
+		JButton deleteButton = new JButton("删 除");
+		deleteButton.setBounds(554, 208, 123, 31);
+		deleteButton.setFont(new Font("宋体", Font.PLAIN, 15));
+		add(deleteButton);
+		
+		SearchPanel panel = new SearchPanel();
+		panel.setBorder(null);
+		panel.setBounds(154, 369, 504, 75);
+		add(panel);
+
 	}
 }

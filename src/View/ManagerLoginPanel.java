@@ -4,6 +4,9 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +17,10 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+
+import Database.BOOKDAO;
+import model.Manager;
+import model.User;
 /**
  * 
  * @author ’≈‘∆ÃÏ
@@ -29,7 +36,7 @@ public class ManagerLoginPanel extends JPanel {
 	private JButton loginButton;
 	private JButton backButton;
 
-	public ManagerLoginPanel(JFrame mainJFrame, JPanel panel, JPanel contentPanel) {
+	public ManagerLoginPanel(JPanel contentPanel) {
 		setLayout(null);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -72,8 +79,29 @@ public class ManagerLoginPanel extends JPanel {
 		loginButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				managerTextField.getText();
 				
+				BOOKDAO bookdao = new BOOKDAO();
+				List<Manager> managers = new ArrayList<>();
+				boolean isManagerTrue = false;
+				try {
+					managers = bookdao.queryManagerAll();
+					for (int i = 0; i < managers.size(); i++){
+						if(managerTextField.getText().equals(managers.get(i).getAdminName())
+								&& passwordTextField.getText().equals(managers.get(i).getPassword())){
+							isManagerTrue = true;
+							break;
+						}
+					}
+					if (isManagerTrue){
+						MainFrame.mainPanel.removeAll();
+						MainFrame.mainPanel.add(new ManagerPanel());
+						MainFrame.mainPanel.validate();
+						MainFrame.mainJFrame.repaint();
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		loginButton.setBounds(270, 370, 93, 33);
@@ -83,10 +111,10 @@ public class ManagerLoginPanel extends JPanel {
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				panel.removeAll();
-				panel.add(contentPanel);
-				panel.validate();
-				mainJFrame.repaint();
+				MainFrame.mainPanel.removeAll();
+				MainFrame.mainPanel.add(contentPanel);
+				MainFrame.mainPanel.validate();
+				MainFrame.mainJFrame.repaint();
 			}
 		});
 		backButton.setBounds(420, 370, 93, 33);

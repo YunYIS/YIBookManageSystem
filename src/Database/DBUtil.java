@@ -6,6 +6,7 @@ package Database;
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBUtil {
 	
@@ -30,6 +31,17 @@ public class DBUtil {
 	 */
 	public static Connection getBOOKConnection(){
 		return BOOKConn;
+	}
+	/**
+	 * 关闭数据库连接
+	 */
+	public static void closeBOOKConnection(){
+		try {
+			BOOKConn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
