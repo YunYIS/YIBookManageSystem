@@ -1,8 +1,7 @@
 package model;
 /**
  * 管理员实体类
- * @author 张云天
- *
+ * @author YunYIS
  */
 public class Manager {
 	

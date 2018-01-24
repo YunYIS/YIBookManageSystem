@@ -1,7 +1,7 @@
 package model;
 /**
  * 书籍实体类
- * @author 张云天
+ * @author YunYIS
  *
  */
 public class Book {

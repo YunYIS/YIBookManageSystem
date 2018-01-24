@@ -19,8 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 /**
  * 
- * @author ÕÅÔÆÌì
- *
+ * @author YunYIS
  */
 public class MainFrame {
 
@@ -34,7 +33,7 @@ public class MainFrame {
 				try {
 					MainFrame mainFrame = new MainFrame();
 					mainFrame.initialize();
-					mainFrame.mainJFrame.setVisible(true);
+					mainJFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

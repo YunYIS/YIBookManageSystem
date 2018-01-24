@@ -11,14 +11,13 @@ import Database.BOOKDAO;
 import model.User;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class UserRegister extends JPanel {
 	private JTextField userNameTextField;
 	private JTextField passwordTextField;

@@ -7,10 +7,12 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+/**
+ * 
+ * @author YunYIS
+ */
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel {
 	

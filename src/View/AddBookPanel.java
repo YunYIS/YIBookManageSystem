@@ -5,7 +5,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
+/**
+ * 
+ * @author YunYIS
+ */
+@SuppressWarnings("serial")
 public class AddBookPanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;

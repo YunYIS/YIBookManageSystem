@@ -2,7 +2,7 @@ package Database;
 
 /**
  * 加载、获取数据库连接工具类
- * @author 张云天
+ * @author YunYIS
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,6 @@ public class DBUtil {
 	private static final String BOOK_URL = "jdbc:sqlserver://localhost:1433;" +
 			"databaseName=BOOK;integratedSecurity=true;";
 	
-	private static Connection USEConn = null;
 	private static Connection BOOKConn = null;
 	static {
 		try {

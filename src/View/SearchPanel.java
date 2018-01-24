@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
+@SuppressWarnings("serial")
 public class SearchPanel extends JPanel {
 	private JTextField searchTextField;
 

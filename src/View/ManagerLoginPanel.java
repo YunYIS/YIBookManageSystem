@@ -1,7 +1,6 @@
 package View;
 
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -20,11 +18,9 @@ import javax.swing.border.EmptyBorder;
 
 import Database.BOOKDAO;
 import model.Manager;
-import model.User;
 /**
  * 
- * @author ’≈‘∆ÃÏ
- *
+ * @author YunYIS
  */
 @SuppressWarnings("serial")
 public class ManagerLoginPanel extends JPanel {
