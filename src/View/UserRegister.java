@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import Database.BOOKAction;
 import Database.BOOKDAO;
 import model.User;
 
@@ -14,7 +15,9 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -25,7 +28,7 @@ public class UserRegister extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public UserRegister() {
+	public UserRegister(JPanel userLoginPanel) {
 		setLayout(null);
 		
 		JLabel userNameLabel = new JLabel("用户名：");
@@ -55,27 +58,32 @@ public class UserRegister extends JPanel {
 				BOOKDAO bookdao = new BOOKDAO();
 				List<User> users = new ArrayList<>();
 				boolean isUserExist = false;
-				
+				String userName = userNameTextField.getText();
+				String password = passwordTextField.getText();
 				try {
 					//判断用户名是否为空或“”
-					if(userNameTextField.getText() == null || userNameTextField.getText().equals("")){
+					if(userName == null || userName.equals("")){
 						JOptionPane.showMessageDialog(null, "用户名为空", "提示", JOptionPane.ERROR_MESSAGE); 
 					}else{
 						//判断密码是否为空或“”
-						if(passwordTextField.getText() == null || passwordTextField.getText().equals("")){
+						if(password == null || password.equals("")){
 							JOptionPane.showMessageDialog(null, "密码为空", "提示", JOptionPane.ERROR_MESSAGE); 
 						}
 						else{
 							users = bookdao.queryUserAll();
 							for (int i = 0; i < users.size(); i++){
-								if(userNameTextField.getText().equals(users.get(i).getUserName())){
+								if(userName.equals(users.get(i).getUserName())){
 									isUserExist = true;
 									break;
 								}
 							}
 							if (!isUserExist){
+								User user = new User(userName, password, LocalDate.now().toString());
+								new BOOKAction().addUser(user);
+								MainFrame.nowUser = user;
+								JOptionPane.showMessageDialog(null, "注册成功，点击确定登陆", "成功", JOptionPane.ERROR_MESSAGE); 
 								MainFrame.mainPanel.removeAll();
-								MainFrame.mainPanel.add(new UserPanel());
+								MainFrame.mainPanel.add(new UserPanel(userLoginPanel));
 								MainFrame.mainPanel.validate();
 								MainFrame.mainJFrame.repaint();
 							}else{
@@ -98,7 +106,10 @@ public class UserRegister extends JPanel {
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+				MainFrame.mainPanel.removeAll();
+				MainFrame.mainPanel.add(userLoginPanel);
+				MainFrame.mainPanel.validate();
+				MainFrame.mainJFrame.repaint();
 			}
 		});
 		backButton.setBounds(278, 218, 102, 33);

@@ -42,7 +42,6 @@ public class BOOKDAO {
 				
 				users.add(user);
 			}
-			DBUtil.closeBOOKConnection();//关闭数据库链接
 			return users;
 		}
 		/**
@@ -53,14 +52,15 @@ public class BOOKDAO {
 		public void addUser(User user) throws SQLException{
 			Connection conn = DBUtil.getBOOKConnection();
 			
-			String insertSQL = "insert into [User] values("
-					+ user.getUserName() + ", "
-					+ user.getPassword() + ", "
-					+ user.getRegisterDate() + ")";
+			String insertSQL = "insert into [User] values(?, ?, ?)";
 			
-			Statement stmt = conn.createStatement();
-			stmt.executeUpdate(insertSQL);
-			DBUtil.closeBOOKConnection();
+			PreparedStatement pstmt = conn.prepareStatement(insertSQL);
+			pstmt.setString(1, user.getUserName());
+			pstmt.setString(2, user.getPassword());
+			pstmt.setString(3, user.getRegisterDate());
+			pstmt.executeUpdate();
+			
+			//DBUtil.closeBOOKConnection();
 		}
 		/**
 		 * 查询所有管理员信息
@@ -88,8 +88,16 @@ public class BOOKDAO {
 				managers.add(manager);
 				
 			}
-			DBUtil.closeBOOKConnection();
 			return managers;
+		}
+		/**
+		 * 查询数据库中所有书籍信息
+		 * @return
+		 * @throws SQLException
+		 */
+		public List<Book> queryBookAll() throws SQLException{
+			String querySQL = "select * from books";
+			return queryBookRealized(querySQL);
 		}
 		/**
 		 * 在数据库中，通过 单独的一个字段 对书籍进行模糊查询（可查询头部和尾部不完整匹配内容）
@@ -149,7 +157,6 @@ public class BOOKDAO {
 				
 				books.add(book);
 			}
-			DBUtil.closeBOOKConnection();
 			return books;
 		}
 		/**
@@ -175,7 +182,6 @@ public class BOOKDAO {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(deleteSQL);
 			
-			DBUtil.closeBOOKConnection();
 		}
 		/**
 		 * 修改书籍信息
@@ -210,7 +216,6 @@ public class BOOKDAO {
 			pstmt.setString(8, book.getBorrow() == null ? "无" : book.getBorrow());
 			pstmt.execute();//执行SQL语句
 			
-			DBUtil.closeBOOKConnection();
 		}
 		
 

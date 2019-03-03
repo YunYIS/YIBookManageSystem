@@ -9,6 +9,15 @@ public class User {
 	private String userName;
 	private String password;
 	private String registerDate;
+	
+	public User(){}
+	
+	public User(String userName, String password, String registerDate) {
+		this.userName = userName;
+		this.password = password;
+		this.registerDate = registerDate;
+	}
+	
 	public int getNo() {
 		return no;
 	}

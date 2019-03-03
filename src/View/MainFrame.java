@@ -11,6 +11,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import Database.DBUtil;
+import model.User;
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.Font;
@@ -25,6 +28,7 @@ public class MainFrame {
 
 	public static JFrame mainJFrame;
 	public static JPanel mainPanel;
+	public static User nowUser = null;//当前登陆用户
 	private JPanel contentPanel = new JPanel();
 
 	public static void main(String[] args) {
@@ -133,6 +137,7 @@ public class MainFrame {
 		exitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				DBUtil.closeBOOKConnection();
 				System.exit(0);
 			}
 		});

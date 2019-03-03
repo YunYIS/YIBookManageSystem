@@ -80,5 +80,13 @@ public class BOOKAction {
 	public List<Book> queryBook(String matchContent) throws SQLException{
 		return new BOOKDAO().queryBook(matchContent);
 	}
+	/**
+	 * 查询所有书籍信息
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Book> queryBookAll() throws SQLException{
+		return new BOOKDAO().queryBookAll();
+	}
 	
 }

@@ -19,9 +19,8 @@ import javax.swing.border.EmptyBorder;
 import Database.BOOKDAO;
 import model.*;
 /**
- * 
- * @author 张云天
- *
+ * 用户登陆界面
+ * @author YunYIS
  */
 @SuppressWarnings("serial")
 public class UserLoginPanel extends JPanel {
@@ -79,6 +78,7 @@ public class UserLoginPanel extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 				BOOKDAO bookdao = new BOOKDAO();
 				List<User> users = new ArrayList<>();
+				User user = null;
 				boolean isUserTrue = false;
 				try {
 					users = bookdao.queryUserAll();
@@ -86,12 +86,14 @@ public class UserLoginPanel extends JPanel {
 						if(userNameTextField.getText().equals(users.get(i).getUserName())
 								&& passwordTextField.getText().equals(users.get(i).getPassword())){
 							isUserTrue = true;
+							user = users.get(i);
 							break;
 						}
 					}
 					if (isUserTrue){
+						MainFrame.nowUser = user;
 						MainFrame.mainPanel.removeAll();
-						MainFrame.mainPanel.add(new UserPanel());
+						MainFrame.mainPanel.add(new UserPanel(UserLoginPanel.this));
 						MainFrame.mainPanel.validate();
 						MainFrame.mainJFrame.repaint();
 					}
@@ -118,6 +120,15 @@ public class UserLoginPanel extends JPanel {
 		add(backButton);
 		
 		JButton registerButton = new JButton("注册");
+		registerButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				MainFrame.mainPanel.removeAll();
+				MainFrame.mainPanel.add(new UserRegister(UserLoginPanel.this));
+				MainFrame.mainPanel.validate();
+				MainFrame.mainJFrame.repaint();
+			}
+		});
 		registerButton.setBounds(422, 370, 93, 33);
 		add(registerButton);
 
